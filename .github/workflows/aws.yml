@@ -24,6 +24,6 @@ jobs:
       - name: Pull Image from docker hub
         run: docker pull zrwhits/iws-client:latest
       - name: Delete old container
-        run: docker rm -f iws-client
+        run: docker rm -f iws-client-container
       - name: Run Docker Container 
-        run: docker run -d -p 3000:80 --name client-app-container zrwhits/iws-client
+        run: docker run -d -p 3000:80 --name iws-client-container zrwhits/iws-client
