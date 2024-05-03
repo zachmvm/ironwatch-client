@@ -13,7 +13,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t zrwhits/iws-client  .
+        run: docker build -t zrwhits/iws-client  . --build-arg REACT_APP_NODE_ENV='production' --build-arg REACT_APP_BACKEND_URL='${{ secrets.REACT_APP_BACKEND_URL }}' .
       - name: Publish Image to docker hub
         run: docker push zrwhits/iws-server:latest
 
@@ -23,5 +23,7 @@ jobs:
     steps: 
       - name: Pull Image from docker hub
         run: docker pull zrwhits/iws-client:latest
+      - name: Delete old container
+        run: docker rm -f iws-client
       - name: Run Docker Container 
-        run: docker run -d -p 3000:3000 --name client-app-container -e MONGO_PASSWORD='${{ secrets.PASSWORD }}' zrwhits/iws-client
+        run: docker run -d -p 3000:80 --name client-app-container zrwhits/iws-client
