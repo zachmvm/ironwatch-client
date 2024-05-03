@@ -1,5 +1,13 @@
 FROM node:alpine3.19 as build
 
+ARG REACT_APP_NODE_ENV
+ARG REACT_APP_BACKEND_URL
+
+# Set default values for environment variables
+ENV REACT_APP_NODE_ENV=$REACT_APP_NODE_ENV
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+
+
 # Build app
 WORKDIR /app
 COPY package.json . 
