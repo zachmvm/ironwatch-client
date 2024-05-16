@@ -26,4 +26,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f iws-client-container
       - name: Run Docker Container 
-        run: docker run -d -p 3000:80 --name iws-client-container zrwhits/iws-client
+        run: docker run -d -p 4000:80 --name iws-client-container zrwhits/iws-client
